@@ -234,7 +234,7 @@ class SuppleWrite{
 		
 		//Get the Field List
 		$fields = $wpdb->get_results("SELECT * FROM "
-			.SUPPLEFIELDSTABLE." WHERE form_id = ".$this->options['form_id']);
+			.SUPPLEFIELDSTABLE." WHERE form_id = ".$this->options['form_id']." ORDER BY seq");
 		
 		if(!$fields){ 
 			echo "<h3>Supple Forms WARNING:</h3>No custom fields have been added.";
