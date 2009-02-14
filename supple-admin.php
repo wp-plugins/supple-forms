@@ -43,6 +43,11 @@ class SuppleAdmin{
 			$this->saveFields($this->options);
 		}
 		
+		//Delete field
+		if(isset($_POST['deleteSuppleField'])){
+			$this->deleteField($this->options);
+		}
+		
 		//Generate Custom Table
 		if(isset($_POST['generateSuppleTable'])){
 			$this->generateCustomTable($this->options);
@@ -302,7 +307,22 @@ class SuppleAdmin{
 			$this->message ="Supple Forms settings updated...";
 	}
 	
-	function saveFields(&$options)
+	function deleteField($options)
+	{
+		global $wpdb;
+		
+		//This section deletes Field settings
+		check_admin_referer( 'update-suppleforms');
+		
+		$ret = $wpdb->query("DELETE FROM ".SUPPLEFIELDSTABLE." WHERE field_id="
+			.(int)$this->field_id." LIMIT 1" );
+		if($ret){$this->message = "Field deleted...";}
+		
+		return;
+	}
+	
+	
+	function saveFields($options)
 	{
 		global $wpdb;
 		
@@ -519,7 +539,10 @@ class SuppleAdmin{
 </td>
 </tr>
 <tr>
-<th>Select field to edit:</th><td><?php echo $fieldsDDL;?>&nbsp;<input type="submit" name="showFieldSettings" tabindex="100" value="<?php _e('Edit', 'suppleLang') ?>" /></td></tr>
+<th>Select field to edit:</th><td><?php echo $fieldsDDL;?>&nbsp;<input type="submit" name="showFieldSettings" tabindex="100" value="<?php _e('Edit', 'suppleLang') ?>" />
+<input type="submit" name="deleteSuppleField" onclick='return suppleConfirmDeleteField();' value="<?php _e('Delete', 'suppleLang') ?>" />
+
+</td></tr>
 
 <tr>
 	<th>Database field name:</th>
@@ -840,7 +863,7 @@ if($fieldsTable){
 		
 			}
 		}
-		$ret ="<select name='sppl_field_id'>".$ret."</select>";
+		$ret ="<select id='supple_fieldDropDown' name='sppl_field_id'>".$ret."</select>";
 		return $ret;
 	}
 	

@@ -7,6 +7,11 @@ function confirmGenerateSpplTable(){
 	return confirm('WARNING: You are about to alter your Custom Table.\n\nYou should minimize the # of times this operation is executed.  Existing data will likely be lost in columns switching from text to numeric data types.\n\nAre you ready to Generate your Custom Table now?');
 }
 
+function suppleConfirmDeleteField(){
+	var fieldname = jQuery("#supple_fieldDropDown option:selected").text();
+	return confirm('Do you want to delete field: ' + fieldname + '?');
+}
+
 function suppleDuplicator(eleId){
 	
 	suppleClones++;
