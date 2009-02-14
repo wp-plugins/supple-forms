@@ -60,7 +60,7 @@ class SuppleAdmin{
 	//  - does not delete fields that are dropped from field list
 	//	- will create a new table if you change the Custom Table Name
 	//	- does not drop orphaned tables or delete their contents
-	public function generateCustomTable($options)
+	function generateCustomTable($options)
 	{
 		//Make sure user wants to do custom table
 		if($options['use_custom_fields'] == 1){
@@ -179,13 +179,13 @@ class SuppleAdmin{
 		return $ret;
 	}
 	
-	public function showMetaBoxSettings()
+	function showMetaBoxSettings()
 	{
 		//Display the Admin Page form
 		$this->printAdminPage($this->options);
 	}
 	
-	public function showFieldEditor()
+	function showFieldEditor()
 	{
 		//Display the Field Editor form
 		$this->printEditFieldsPage($this->options, $this->field_id);	
