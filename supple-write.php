@@ -549,7 +549,7 @@ class SuppleWrite{
 		//Get list of Multi Value and Checkbox fields for retrieving data from WP Custom Fields
 		foreach($fields as $f){
 			//Include Checkboxes and Multi Value fields
-			if($f->type == 4 || $f->multi_val ==1){
+			if($f->type == 4 || $f->multi_val ==1 || $this->options['use_custom_fields'] == 1){
 				$metakeys[] = str_replace("'","",$f->field_name);
 			}
 		}
