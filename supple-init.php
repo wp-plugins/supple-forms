@@ -10,7 +10,13 @@ class SuppleFormsInit{
 		global $wpdb;
 			
 			require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-						
+			
+			if ( $wpdb->has_cap( 'collation' ) ) {
+				if ( ! empty($wpdb->charset) )
+					$charset_collate = "DEFAULT CHARACTER SET $wpdb->charset";
+				if ( ! empty($wpdb->collate) )
+					$charset_collate .= " COLLATE $wpdb->collate";
+			}		
 				
 			//Create the Fields table
 			$sql = "CREATE TABLE " . $wpdb->prefix."sppl_fields (
@@ -26,7 +32,7 @@ class SuppleFormsInit{
 				seq INT(4) ,
 				status TINYINT(1) NOT NULL ,
 				PRIMARY KEY  (field_id)
-				)  DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
+				)  $charset_collate;";
 			
 			dbDelta($sql);
 			
@@ -38,7 +44,7 @@ class SuppleFormsInit{
 				label VARCHAR(255) ,
 				seq INT(4) ,
 				PRIMARY KEY   (id)
-				)  DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
+				)  $charset_collate;";
 			dbDelta($sql);
 			
 			/* Create the Supple HTML Snips table
@@ -55,7 +61,7 @@ class SuppleFormsInit{
 				css TEXT ,
 				lists VARCHAR(255) ,
 				PRIMARY KEY   (snip_id)
-				)  DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
+				)  $charset_collate;";
 			dbDelta($sql);
 			
 			//Create the Forms table
@@ -71,7 +77,7 @@ class SuppleFormsInit{
 				seq INT(4) ,
 				status TINYINT(1) NOT NULL default '1',
 				PRIMARY KEY  (form_id)
-				)  DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
+				)  $charset_collate;";
 			
 			dbDelta($sql);
 	}

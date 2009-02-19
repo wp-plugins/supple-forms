@@ -121,9 +121,16 @@ class SuppleAdmin{
 			}
 		}
 		
+		if ( $wpdb->has_cap( 'collation' ) ) {
+				if ( ! empty($wpdb->charset) )
+					$charset_collate = "DEFAULT CHARACTER SET $wpdb->charset";
+				if ( ! empty($wpdb->collate) )
+					$charset_collate .= " COLLATE $wpdb->collate";
+		}	
+		
 		$sql .= " ,
 				PRIMARY KEY  (id)
-				)  DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
+				)  $charset_collate;";
 		
 		//Here we go....make the table.....NOW!
 		$ret = dbDelta($sql);
