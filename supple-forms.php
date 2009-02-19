@@ -3,7 +3,7 @@
 Plugin Name: Supple Forms
 Plugin URI: http://www.whypad.com/posts/supple-forms-a-wordpress-cms-plugin/566/
 Description: A CMS plugin to create custom write panels whose data can be stored in custom fields or a custom table.  Provides powerful shortcode support for displaying data and HTML snippets in Posts/Pages.  Provides an Object containing form data that can be used in code for manipulating form data.
-Version: 0.1.5
+Version: 0.1.6
 Author: Byron Bennett
 Author URI: http://www.whypad.com/
 */
@@ -32,9 +32,6 @@ define("SUPPLEFORMSTABLE", $wpdb->prefix."sppl_forms");
 define("SUPPLELOOKUPTABLE", $wpdb->prefix."sppl_lookup");
 define("SUPPLETABLEPREFIX", $wpdb->prefix."supple_");
 
-//Until multiple forms is implemented, set up default FORM ID
-$_POST['sppl_form_id'] = 1;
-$_REQUEST['sppl_form_id'] = 1;
 
 class SuppleForms{
 	var $options;	
@@ -49,9 +46,16 @@ class SuppleForms{
 	 */
 	function SuppleForms(){
 		
+		
+		/*
+		 * Until multiple forms is implemented, set up default FORM ID
+		 *
 		if(isset($_REQUEST['sppl_form_id'])){
 			$this->form_id = (int)$_REQUEST['sppl_form_id'];
 		} else { $this->form_id = 0;}
+		*/
+		
+		$this->form_id = 1;  //undo this when multiple forms is implemented
 
 		$this->options = $this->getFormSettings($this->form_id);
 	}
