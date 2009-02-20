@@ -4,7 +4,7 @@ Donate link: http://www.whypad.com/posts/supple-forms-a-wordpress-cms-plugin/566
 Tags: CMS, Custom Write Panel, Custom Fields, Forms, Shortcode, Custom Table, Inject HTML
 Requires at least: 2.5
 Tested up to: 2.7.1
-Stable tag: 0.1.6
+Stable tag: 0.1.61
 
 Supple Forms - a CMS plugin for WordPress to create custom write panels, and format and insert values into Posts.
 

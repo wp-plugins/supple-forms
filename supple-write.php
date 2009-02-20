@@ -146,8 +146,20 @@ class SuppleWrite{
 		if(!$res){
 			//Insert the data if no record was updated.
 			$data['post_id'] = (int)$post_id;
-			$wpdb->insert($tablename, $data);
-			$this->message = "Supple data inserted.";
+			
+			$reccnt = $wpdb->get_var("SELECT COUNT(post_id) as cnt FROM "
+				. " $tablename WHERE post_id = ".$data['post_id']);
+			
+			if( $reccnt <> 1){
+				//delete existing records based on POST ID...must change when go to 
+				//forms that don't rely on POST ID
+				$wpdb->query("DELETE FROM $tablename WHERE post_id = $post_id");
+				$wpdb->insert($tablename, $data);
+				$this->message = "Supple data inserted.";
+			} else {
+				$this->message = "Supple data updated";
+			}
+			
 		}else {
 			$this->message = "Supple data updated.";
 		}
