@@ -3,7 +3,7 @@
 Plugin Name: Supple Forms
 Plugin URI: http://www.whypad.com/posts/supple-forms-a-wordpress-cms-plugin/566/
 Description: A CMS plugin to create custom write panels whose data can be stored in custom fields or a custom table.  Provides powerful shortcode support for displaying data and HTML snippets in Posts/Pages.  Provides an Object containing form data that can be used in code for manipulating form data.
-Version: 0.1.61
+Version: 0.1.62
 Author: Byron Bennett
 Author URI: http://www.whypad.com/
 */
@@ -451,6 +451,7 @@ class SuppleForms{
 			}
 		}
 		$ret = $sepopentag. implode($separator, $ret). $sepclosetag;
+		$ret = nl2br($ret);
 		return $ret;
 	}
 	
